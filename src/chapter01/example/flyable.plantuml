@@ -1,0 +1,12 @@
+@startuml
+title 실체화 관계 예시
+
+interface Flyable
+
+class Plane
+
+class Bird
+
+Flyable <|.. Plane
+Flyable <|.. Bird
+@enduml

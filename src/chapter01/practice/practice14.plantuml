@@ -1,0 +1,13 @@
+@startuml
+abstract class Member {}
+
+class EnterpriseMember {}
+
+class PersonalMember {}
+
+class Person {}
+
+Member <|-- EnterpriseMember
+Member <|-- PersonalMember
+EnterpriseMember "0..*" -- "1" Person
+@enduml

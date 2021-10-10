@@ -1,0 +1,30 @@
+@startuml
+class Customer {}
+
+class Order {}
+
+class OrderItem {
+  -amount: Integer
+}
+
+class Item {
+  -name: String
+  -price: BigDecimal
+}
+
+abstract class PaymentMethod {}
+
+class Cash {}
+
+class CheckCard {}
+
+class CreditCard {}
+
+Customer -- "0..*" Order
+Order -- "1..*" PaymentMethod
+PaymentMethod <|-- Cash
+PaymentMethod <|-- CheckCard
+PaymentMethod <|-- CreditCard
+Order "1" *-- "1..*" OrderItem
+OrderItem "1" o-- "1" Item
+@enduml

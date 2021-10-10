@@ -1,0 +1,31 @@
+@startuml
+title 일반화 관계 예시
+
+abstract HomeAppliance {
+  -serialNo: String
+  -manufacturer: String
+  -year: Integer
+
+  {abstract} +turnOn(): void
+  {abstract} +turnOff(): void
+}
+
+class Washer {
+  +turnOn(): void
+  +turnOff(): void
+}
+
+class Freezer {
+  +turnOn(): void
+  +turnOff(): void
+}
+
+class DishWasher {
+  +turnOn(): void
+  +turnOff(): void
+}
+
+HomeAppliance <|-- Washer
+HomeAppliance <|-- Freezer
+HomeAppliance <|-- DishWasher
+@enduml

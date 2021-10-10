@@ -1,0 +1,5 @@
+@startuml
+'title 의존 관계 예시
+
+Car ..> GasPump
+@enduml

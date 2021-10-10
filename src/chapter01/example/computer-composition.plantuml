@@ -1,0 +1,23 @@
+@startuml
+title 합성 관계 예시
+
+class Computer {
+  -mb: MainBoard
+  -c: CPU
+  -m: Memory
+  -ps: PowerSupply
+}
+
+class MainBoard {}
+
+class CPU {}
+
+class Memory {}
+
+class PowerSupply {}
+
+Computer *-- "1" MainBoard
+Computer *-- "1..*" CPU
+Computer *-- "2,4" Memory
+Computer *-- "1" PowerSupply
+@enduml

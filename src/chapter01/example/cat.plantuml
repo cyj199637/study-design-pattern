@@ -1,0 +1,13 @@
+@startuml
+title 예제코드 1-1
+
+class Cat {
+  name: String
+  void meow(): void
+}
+
+class CatWithVisibility {
+  -name: String
+  +meow(): void
+}
+@enduml

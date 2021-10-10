@@ -1,0 +1,5 @@
+@startuml
+class Subject {}
+
+Subject "0..*" <-- "1" Subject: {Pre Subject}
+@enduml

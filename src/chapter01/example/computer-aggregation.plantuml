@@ -1,0 +1,23 @@
+@startuml
+title 집약 관계 예시
+
+class Computer {
+  -mb: MainBoard
+  -c: CPU
+  -m: Memory
+  -ps: PowerSupply
+}
+
+class MainBoard {}
+
+class CPU {}
+
+class Memory {}
+
+class PowerSupply {}
+
+Computer o-- MainBoard
+Computer o-- CPU
+Computer o-- Memory
+Computer o-- PowerSupply
+@enduml

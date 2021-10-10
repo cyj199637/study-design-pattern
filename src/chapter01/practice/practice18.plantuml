@@ -1,0 +1,15 @@
+@startuml
+interface Spinnable {
+  +spin()
+}
+
+class PinWheel {}
+
+class Fan {}
+
+class Helicopter {}
+
+Spinnable <|.. PinWheel
+Spinnable <|.. Fan
+Spinnable <|.. Helicopter
+@enduml

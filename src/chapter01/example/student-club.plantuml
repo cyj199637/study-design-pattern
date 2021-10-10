@@ -1,0 +1,7 @@
+@startuml
+class Student {}
+
+class Club {}
+
+Club "0..1" *-- "0..*" Student
+@enduml

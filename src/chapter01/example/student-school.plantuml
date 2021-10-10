@@ -1,0 +1,9 @@
+@startuml
+title 연관 관계 예시
+
+class Student {}
+
+class School {}
+
+Student "100..*" -- "1" School
+@enduml

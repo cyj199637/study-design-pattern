@@ -1,0 +1,14 @@
+@startuml
+class employee {}
+
+class work {}
+
+class workingHistory {
+  -startDate: LocalDateTime
+  -duration: Integer
+}
+
+'employee "1..*" -- "0..*" work
+employee "1..*" -- "1..*" work
+(employee, work) .. workingHistory
+@enduml
