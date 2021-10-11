@@ -1,0 +1,6 @@
+@startuml
+Item "0..*" <-- Member
+Member <|-- VIPMember
+Member <|-- OrdinaryMember
+VIPMember o--> "0..*" DiscountCoupon
+@enduml

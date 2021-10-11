@@ -1,0 +1,12 @@
+@startuml
+Member <|-- VIP
+Member <|-- Good
+Member <|-- Ordinary
+@enduml
+
+@startuml
+Member "1..*" --> "1" MemberShip
+MemberShip <|-- VIP
+MemberShip <|-- Good
+MemberShip <|-- Ordinary
+@enduml
