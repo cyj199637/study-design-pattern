@@ -1,0 +1,28 @@
+@startuml
+class Student
+class StudentDao
+class ReportCard
+class AttendanceBook
+
+Student <-- StudentDao
+Student <-- ReportCard
+Student <-- AttendanceBook
+SomeClient --> ReportCard
+SomeClient --> AttendanceBook
+@enduml
+
+@startuml
+class Student
+class StudentDao
+interface Printable
+class ReportCard
+class AttendanceBook
+class LibraryLendingList
+
+Student <--- StudentDao
+Student <--- Printable
+Printable <.. ReportCard
+Printable <.. AttendanceBook
+Printable <.. LibraryLendingList
+SomeClient --> Printable
+@enduml

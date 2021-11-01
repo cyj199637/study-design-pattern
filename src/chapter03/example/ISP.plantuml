@@ -1,0 +1,26 @@
+@startuml
+class 복합기 {
+  +copy(): void
+  +fax(): void
+  +print(): void
+}
+
+interface 프린터 {
+  +print(): void
+}
+
+interface 복사기 {
+  +copy(): void
+}
+
+interface 팩스 {
+  +fax(): void
+}
+
+복합기 ..|> 프린터
+복합기 ..|> 복사기
+복합기 ..|> 팩스
+프린터 <-- 프린터클라이언트
+복사기 <-- 복사기클라이언트
+팩스 <-- 팩스클라이언트
+@enduml

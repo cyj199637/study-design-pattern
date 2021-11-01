@@ -1,0 +1,21 @@
+@startuml
+class Student {
+  +getCouses(): void
+  +addCourse(Course c): void
+  +save(): void
+  +load(): Student
+  +printOnReportCard(): void
+  +printOnAttendanceBook(): void
+}
+@enduml
+
+@startuml
+class Student
+class StudentDao
+class ReportCard
+class AttendanceBook
+
+Student <-- StudentDao
+Student <-- ReportCard
+Student <-- AttendanceBook
+@enduml

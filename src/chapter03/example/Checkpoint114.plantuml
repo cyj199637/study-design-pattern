@@ -1,0 +1,42 @@
+@startuml
+class FuelTankMonitoring {
+  +checkAndWarn(): void
+  -checkFuelTank(): boolean
+  -giveWarningSignal(): void
+}
+@enduml
+
+@startuml
+class FuelTankMonitoring {
+  -checkSystem: CheckSystem
+  -signalSystem: SignalSystem
+
+  +checkAndWarn(): void
+}
+
+class CheckSystem {
+  +check(): boolean
+}
+
+class SignalSystem {
+  +send(): void
+}
+
+FuelTankMonitoring o-- CheckSystem
+FuelTankMonitoring o-- SignalSystem
+@enduml
+
+@startuml
+class FuelTankMonitoring {
+  +checkAndWarn(): void
+  #checkFuelTank(): boolean
+  #giveWarningSignal(): void
+}
+
+class FuelTankMonitoringWith {
+  #checkFuelTank(): boolean
+  #giveWarningSignal(): void
+}
+
+FuelTankMonitoring <|-- FuelTankMonitoringWith
+@enduml

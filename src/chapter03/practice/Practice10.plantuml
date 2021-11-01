@@ -1,0 +1,23 @@
+@startuml
+class CalculatePayMachine {
+  -workingHoursLabel: JLabel
+  -overtimeHoursLabel: JLabel
+  -payAmountLabel: JLabel
+  -tfWorkingHours: JTextField
+  -tfOvertimeHours: JTextField
+  -tfResult: JTextField
+  -calcButton: JButton
+  -resetButton: JButton
+  -end: JButton
+  -payLogic: CalculatePayLogic
+
+  +init(): void
+  +start(): void
+  +isDataEntered(): boolean
+  +insertUpdate(DocumentEvent e): void
+  +removeUpdate(DocumentEvent e): void
+  +changeUpdate(DocumentEvent e): void
+  -checkData(): void
+  +actionPerformed(ActionEvent e): void
+}
+@enduml

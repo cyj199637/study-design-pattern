@@ -1,0 +1,17 @@
+@startuml
+class Employee {
+  -id: String
+  -name: String
+  -workHours: Integer
+  -overTimeHours: Integer
+  -payLogic: CalculatePayLogic
+
+  +calculatePay(): void
+}
+
+class CalculatePayLogic {
+  +calculatePay(int workHours, int overTimeHours): Integer
+}
+
+Employee --> CalculatePayLogic
+@enduml

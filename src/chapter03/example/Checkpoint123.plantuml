@@ -1,0 +1,13 @@
+@startuml
+class Kid {
+  -Robot: Toy
+  +setToy(Toy toy): void
+  +play(): void
+}
+
+class Robot {
+  +toString(): void
+}
+
+Kid o-- Robot
+@enduml

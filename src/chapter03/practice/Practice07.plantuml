@@ -1,0 +1,28 @@
+@startuml
+class PayrollManager {
+  +writeEachEmployeePay(): void
+}
+
+class Employee {
+  +calculatePay(): void
+}
+
+PayrollManager o--> "0..*" Employee
+@enduml
+
+@startuml
+class PayrollManager {
+  +writeEachEmployeePay(): void
+}
+
+class Employee {
+  +calculatePay(): void
+}
+
+interface Printable {
+  +print(): void
+}
+
+PayrollManager o--> "0..*" Employee
+PayrollManager o-- Printable
+@enduml

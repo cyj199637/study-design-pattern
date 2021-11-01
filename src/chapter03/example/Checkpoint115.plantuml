@@ -1,0 +1,62 @@
+@startuml
+class TimeReminder {
+  -mp3: MP3
+  +reminder(): void
+}
+
+class MP3 {
+  +playSong(): void
+}
+
+TimeReminder *-- MP3
+@enduml
+
+@startuml
+class TimeReminder {
+  {static} -CALENDAR: Calendar
+  -mp3: MP3
+  -reminderTime: int
+  +reminder(): void
+}
+
+class MP3 {
+  +playSong(): void
+}
+
+MP3 <-- TimeReminder
+@enduml
+
+@startuml
+class TimeReminder {
+  -mp3: MP3
+  -timeProvider: TimeProvider
+  +setTimeProvider(TimeProvider timeProvider): void
+  +reminder(): void
+}
+
+class MP3 {
+  +playSong(): void
+}
+
+interface TimeProvider {
+  +setHours(int hours): void
+  +getTime(): int
+}
+
+class RealTimeProvider {
+  -calendar: Calendar
+  +setHours(int hours): void
+  +getTime(): int
+}
+
+class FakeTimeProvider {
+  -calendar: Calendar
+  +setHours(int hours): void
+  +getTime(): int
+}
+
+MP3 <-- TimeReminder
+TimeReminder --> TimeProvider
+TimeProvider <|.. RealTimeProvider
+TimeProvider <|.. FakeTimeProvider
+@enduml

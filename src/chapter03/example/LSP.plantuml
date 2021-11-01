@@ -1,0 +1,15 @@
+@startuml
+class Bag {
+  -price: int
+  +setPrice(int price): void
+  +getPrice(): int
+}
+
+class DiscountBag {
+  -discountedRate: double
+  +setDiscountedRate(double discountedRate): void
+  +applyDiscount(int price): void
+}
+
+Bag <|-- DiscountBag
+@enduml
