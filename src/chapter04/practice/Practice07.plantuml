@@ -1,0 +1,26 @@
+@startuml
+participant GUI
+participant GridLayout
+participant Panel1
+participant Panel2
+participant BorderLayout
+participant FlowLayout
+
+activate GUI
+GUI -> GUI: init()
+GUI -> GridLayout: <<create>>
+activate GridLayout
+GUI -> GUI: setLayout(GridLayout)
+GUI -> BorderLayout: <<create>>
+activate BorderLayout
+GUI -> Panel1: <<create>> new Panel(BorderLayout)
+activate Panel1
+GUI -> Panel1: add("West", w)
+GUI -> Panel1: add("Center", tf)
+GUI -> FlowLayout: <<create>> new FlowLayout(FlowLayout.Center)
+activate FlowLayout
+GUI -> Panel2: <<create>> new Panel(FlowLayout)
+activate Panel2
+GUI -> Panel2: add(b)
+GUI -> GUI: add(p2)
+@enduml

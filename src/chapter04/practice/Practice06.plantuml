@@ -1,0 +1,20 @@
+@startuml
+actor practice06
+participant A1
+participant A2
+participant A3
+
+practice06 -> A1: doA1()
+activate A1
+A1 -> A2: <<create>>
+activate A2
+A1 -> A2: doA2(this)
+A2 -> A1: doIt()
+A1 -> A3: <<create>>
+activate A3
+A1 -> A3: doA3(a2)
+A3 -> A2: doThat(a2)
+deactivate A3
+deactivate A2
+deactivate A1
+@enduml

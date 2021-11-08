@@ -1,0 +1,16 @@
+@startuml
+participant X
+participant Y
+participant Z
+participant W
+
+X -> Y: m1(a, b)
+activate Y
+Y -> Z: <<create>>
+activate Z
+Y -> Z: [g]: m2()
+Z -> W: <<destroy>>
+activate W
+deactivate W
+Z --> Y
+@enduml

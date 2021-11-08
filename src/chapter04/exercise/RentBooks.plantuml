@@ -1,0 +1,70 @@
+@startuml
+participant 사서
+participant 대여화면
+participant 회원리스트
+participant 책리스트
+participant 대여
+participant 회원
+participant 책
+
+사서 -> 대여화면: enter(id, password)
+대여화면 -> 회원리스트: m:=find(id)
+대여화면 -> 회원: ok:=validate(password)
+사서 -> 대여화면: enter(bookTitle)
+대여화면 -> 책리스트: b:=find(bookTItle)
+대여화면 -> 책: ok:=canReverse(m)
+대여화면 -> 대여: <<create>> [ok=true]: new(m, b)
+대여화면 -> 대여화면: display("대여 ok")
+@enduml
+
+@startuml
+participant 사서
+participant 대여화면
+participant 회원리스트
+participant 책리스트
+participant 대여
+participant 회원
+participant 책
+
+사서 -> 대여화면: enter(id, password)
+대여화면 -> 회원리스트: m:=find(id)
+대여화면 -> 회원: ok:=validate(password)
+
+alt [ok=true]
+  사서 -> 대여화면: enter(bookTitle)
+  대여화면 -> 책리스트: b:=find(bookTItle)
+  대여화면 -> 책: ok:=canReverse(m)
+  대여화면 -> 대여: <<create>> [ok=true]: new(m, b)
+  대여화면 -> 대여화면: display("대여 ok")
+
+else [else]
+  대여화면 -> 대여화면: display("Not ok")
+
+end
+@enduml
+
+@startuml
+participant 사서
+participant 대여화면
+participant 회원리스트
+participant 책리스트
+participant 대여
+participant 회원
+participant 책
+
+loop [ok<>true]
+  사서 -> 대여화면: enter(id, password)
+  대여화면 -> 회원리스트: m:=find(id)
+  대여화면 -> 회원: ok:=validate(password)
+end
+
+alt [ok=true]
+  사서 -> 대여화면: enter(bookTitle)
+  대여화면 -> 책리스트: b:=find(bookTItle)
+  대여화면 -> 책: ok:=canReverse(m)
+  대여화면 -> 대여: <<create>> [ok=true]: new(m, b)
+  대여화면 -> 대여화면: display("대여 ok")
+else [else]
+  대여화면 -> 대여화면: display("Not ok")
+end
+@enduml
