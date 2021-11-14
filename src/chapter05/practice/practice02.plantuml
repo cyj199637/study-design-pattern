@@ -1,0 +1,22 @@
+@startuml
+class Client {
+    -exampleStrategy: ExampleStrategy
+    +setExampleStrategy(): void
+}
+
+interface ExampleStrategy {
+    +strategyMethod(): void
+}
+
+class ConcreteStrategy1 {
+    +strategyMethod(): void
+}
+
+class ConcreteStrategy2 {
+    +strategyMethod(): void
+}
+
+Client --> ExampleStrategy
+ExampleStrategy <|-- ConcreteStrategy1
+ExampleStrategy <|-- ConcreteStrategy2
+@enduml
