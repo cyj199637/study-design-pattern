@@ -2,6 +2,7 @@ package chapter05.practice;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Practice03 {
@@ -17,31 +18,24 @@ public class Practice03 {
                 new Book("D", LocalDateTime.now(), BigDecimal.valueOf(20_000L)),
                 new Book("E", LocalDateTime.now(), BigDecimal.valueOf(17_000L))
         );
-
-        member.buyBooks(books);
-        member.buyBooks(books2);
-
-        System.out.println(member.getRentalAmount());
     }
 }
 
 class Member {
     private String name;
-    private BigDecimal rentalAmount;
+    private BigDecimal totalRentalAmount;
 
     public Member(String name) {
         this.name = name;
-        this.rentalAmount = BigDecimal.ZERO;
+        this.totalRentalAmount = BigDecimal.ZERO;
     }
 
-    public BigDecimal getRentalAmount() {
-        return rentalAmount;
+    public BigDecimal getTotalRentalAmount() {
+        return totalRentalAmount;
     }
 
-    public void buyBooks(List<Book> books) {
-        this.rentalAmount = books.stream()
-                .map(Book::getPrice)
-                .reduce(rentalAmount, BigDecimal::add);
+    public void addRentalAmount(BigDecimal rentalAmount) {
+        this.totalRentalAmount = this.totalRentalAmount.add(rentalAmount);
     }
 }
 
@@ -66,7 +60,7 @@ class Book {
 }
 
 class Counter {
-    private List<DiscountPolicy> policies;
+    private List<DiscountPolicy> policies = new ArrayList<>();
 
     public void setPolicies(List<DiscountPolicy> policies) {
         this.policies = policies;
@@ -76,32 +70,51 @@ class Counter {
         this.policies.add(policy);
     }
 
-    public void calculate(Member buyer, List<Book> books) {
-
+    public BigDecimal calculateTotalPrice(Member buyer, List<Book> books) {
+        BigDecimal totalPrice = books.stream()
+                .map(book -> {
+                    BigDecimal price = book.getPrice();
+                    for (DiscountPolicy policy : policies) {
+                        price = policy.discount(buyer, book, price);
+                    }
+                    return price;
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        buyer.addRentalAmount(totalPrice);
+        return totalPrice;
     }
 }
 
 interface DiscountPolicy {
-    BigDecimal discount(BigDecimal price);
+    BigDecimal discount(Member member, Book book, BigDecimal currentPrice);
 }
 
-class BookDiscountPolicy {
-    private long baseYear;
+class BookDiscountPolicy implements DiscountPolicy {
+    private int baseYear;
     private double discountRate;
 
-    public BigDecimal discount(Book book) {
-        if (LocalDateTime.now().minusYears(baseYear).isAfter(book.getPublishedAt())) {
-            return BigDecimal.valueOf(book.getPrice().doubleValue() * discountRate);
-        }
-        return book.getPrice();
+    public BookDiscountPolicy(int baseYear, double discountRate) {
+        this.baseYear = baseYear;
+        this.discountRate = discountRate;
+    }
+
+    public BigDecimal discount(Member member, Book book, BigDecimal currentPrice) {
+        LocalDateTime year = LocalDateTime.now().minusYears(baseYear);
+        return year.isAfter(book.getPublishedAt()) ? BigDecimal.valueOf(currentPrice.doubleValue() * discountRate) : currentPrice;
     }
 }
 
-class MemberDiscountPolicy {
+class MemberDiscountPolicy implements DiscountPolicy {
     private BigDecimal baseAmount;
     private double discountRate;
 
-    public BigDecimal discount(Member member, Book book) {
-        return null;
+    public MemberDiscountPolicy(BigDecimal baseAmount, double discountRate) {
+        this.baseAmount = baseAmount;
+        this.discountRate = discountRate;
+    }
+
+    public BigDecimal discount(Member member, Book book, BigDecimal currentPrice) {
+        int result = baseAmount.compareTo(member.getTotalRentalAmount());
+        return result < 0 ? BigDecimal.valueOf(currentPrice.doubleValue() * discountRate) : currentPrice;
     }
 }

@@ -1,0 +1,50 @@
+@startuml
+class Member {
+    -name: String
+    -totalRentalAmount: BigDecimal
+
+    +getRentalAmount(): BigDecimal
+    +addRentalAmount(BigDecimal rentalAmount): void
+}
+
+class Book {
+    -signature: String
+    -publishedAt: LocalDateTime
+    -price: BigDecimal
+
+    +getPublishedAt(): LocalDateTime
+    +getPrice(): BigDecimal
+}
+
+class Counter {
+    -policies: List<DiscountPolicy>
+
+    +setPolicies(List<DiscountPolicy> policies): void
+    +addPolicies(DiscountPolicy policy): void
+    +calculateTotalPrice(Member buyer, List<Book> books): BigDecimal
+}
+
+interface DiscountPolicy {
+    discount(Member member, Book book, BigDecimal currentPrice): BigDecimal
+}
+
+class BookDiscountPolicy {
+    -baseYear: int
+    -discountRate: double
+
+    +discount(Member member, Book book, BigDecimal currentPrice): BigDecimal
+}
+
+class MemberDiscountPolicy {
+    -baseAmount: BigDecimal
+    -discountRate: double
+
+    +discount(Member member, Book book, BigDecimal currentPrice): BigDecimal
+}
+
+DiscountPolicy <|-- BookDiscountPolicy
+DiscountPolicy <|-- MemberDiscountPolicy
+Member <.. Counter
+Book <.. Counter
+Counter o-- DiscountPolicy
+@enduml
