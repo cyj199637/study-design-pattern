@@ -186,6 +186,30 @@ class VerticalMoveStrategy extends DirectionStrategy {
     }
 }
 
+class DiagonalMoveStrategy extends DirectionStrategy {
+    @Override
+    public void move(Ball ball) {
+        ball.setIntervals(Ball.INTERVAL, Ball.INTERVAL);
+        while (true) {
+            ball.setX(ball.getX() + ball.getXInterval());
+            ball.setY(ball.getY() + ball.getYInterval());
+            if ((ball.getX() < 0 && ball.getXInterval() < 0) ||
+                    ball.getX() + Ball.SIZE > BallFrame.WIDTH - 15 && ball.getXInterval() > 0) {
+                ball.setIntervals(-ball.getXInterval(), 0);
+            }
+            if ((ball.getY() < 0 && ball.getYInterval() < 0) ||
+                    ball.getY() + Ball.SIZE > BallFrame.HEIGHT - 15 && ball.getYInterval() > 0) {
+                ball.setIntervals(0, -ball.getYInterval());
+            }
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+}
+
 abstract class DrawStrategy {
     public abstract void draw(Ball ball);
 }

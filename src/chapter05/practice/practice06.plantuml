@@ -1,0 +1,30 @@
+@startuml
+class Sale {
+    -items: ArrayList<Item>
+    -printer: Printable
+
+    +printReceipt(): void
+    +add(Item item): void
+    +changePrint(Printable printer): void
+}
+
+class Item {
+    -name: String
+    -price: BigDecimal
+
+    +getName(): String
+    +getPrice(): BigDecimal
+}
+
+interface Printable {
+    print(String target): void
+}
+
+class HD108ReceiptPrinter {
+    +print(String target): void
+}
+
+Sale ..> Item
+Sale o-- Printable
+Printable <|-- HD108ReceiptPrinter
+@enduml

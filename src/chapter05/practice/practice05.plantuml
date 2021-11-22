@@ -1,0 +1,14 @@
+@startuml
+class Running {
+    -field: Field
+}
+
+class Field {
+    -lbl: JLabel
+    -walkingImage: String[]
+
+    +run(): void
+}
+
+Running *-- Field
+@enduml

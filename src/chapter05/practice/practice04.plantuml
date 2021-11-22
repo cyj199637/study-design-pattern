@@ -1,0 +1,77 @@
+@startuml
+class BallFrame {
+    -{static} serialVersionUID: long
+    +{static} WIDTH: int
+    +{static} HEIGHT: int
+    -field: Field
+}
+
+class Field {
+    -{static} serialVersionUID: long
+    -balls: Ball[]
+
+    +paint(Graphics g): void
+    +run(): void
+}
+
+class Ball {
+    +{static} SIZE: int
+    +{static} INTERVAL: int
+    -x: int
+    -y: int
+    -xInterval: int
+    -yInterval: int
+    -directionStrategy: DirectionStrategy
+    -drawStrategy: DrawStrategy
+    -color: Color
+
+    +getX(): int
+    +getY(): int
+    +getXInterval(): int
+    +getYInterval(): int
+    +getColor(): Color
+    +setX(int x): void
+    +setY(int y): void
+    +setIntervals(int xInterval, int yInterval): void
+    +setColor(Color color): void
+    +setDirectionStrategy(DirectionStrategy directionStrategy): void
+    +setDrawStrategy(DrawStrategy drawStrategy): void
+    +draw(): void
+    +move(): void
+    +run(): void
+}
+
+abstract class DirectionStrategy {
+    +{abstract} move(Ball ball): void
+}
+
+class HorizonalMoveStrategy {
+    +move(Ball ball): void
+}
+
+class VerticalMoveStrategy {
+    +move(Ball ball): void
+}
+
+abstract class DrawStrategy {
+    +{abstract} draw(Ball ball): void
+}
+
+class RedDrawStrategy {
+    +draw(Ball ball): void
+}
+
+class BlueDrawStrategy {
+    +draw(Ball ball): void
+}
+
+BallFrame ..> Ball
+BallFrame *-- Field
+Field o-- Ball
+Ball o-- DirectionStrategy
+Ball o-- DrawStrategy
+DirectionStrategy <|-- HorizonalMoveStrategy
+DirectionStrategy <|-- VerticalMoveStrategy
+DrawStrategy <|-- RedDrawStrategy
+DrawStrategy <|-- BlueDrawStrategy
+@enduml
