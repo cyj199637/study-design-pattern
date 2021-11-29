@@ -1,0 +1,17 @@
+@startuml
+Participant Client1
+Participant Client2
+Participant Singleton
+Participant SingletonInstance
+
+Singleton --> SingletonInstance: <<create>>
+SingletonInstance++
+
+par
+  Client1 -[#red]-> Singleton: getInstance
+  Client1 <-[#blue]- Singleton: instance
+else
+  Client2 -[#red]-> Singleton: getInstance
+  Client2 <-[#blue]- Singleton: instance
+end
+@enduml

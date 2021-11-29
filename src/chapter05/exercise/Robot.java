@@ -1,4 +1,4 @@
-package chapter05.example;
+package chapter05.exercise;
 
 public abstract class Robot {
     private String name;

@@ -1,4 +1,4 @@
-package chapter06.example;
+package chapter06.exercise;
 
 public class Printer {
     private static Printer printer = null;

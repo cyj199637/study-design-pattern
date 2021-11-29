@@ -1,4 +1,4 @@
-package chapter06.example;
+package chapter06.exercise;
 
 public class StaticClass {
     private static final int USER_NUM = 5;

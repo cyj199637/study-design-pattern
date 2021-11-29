@@ -1,0 +1,40 @@
+@startuml
+class UsePrinter {
+  +doSomething(): void
+}
+
+interface Printer {
+  +print(String str): void
+}
+
+class RealPrinter {
+  +print(String str): void
+}
+
+class FakePrinter {
+  -String str
+
+  +print(String str): void
+  +getStr(): String
+}
+
+class PrinterFactory {
+  -{static} printerFactory: PrinterFactory
+
+  #PrinterFatory()
+  +{static} getPrinterFactory(): PrinterFactory
+  +{static} setPrinterFactory(PrinterFactory p): void
+  +getPrinter(): Printer
+}
+
+class FakePrinterFactory {
+  +getPrinter(): Printer
+}
+
+UsePrinter ..> PrinterFactory
+Printer <|.. RealPrinter
+Printer <|.. FakePrinter
+PrinterFactory <|-- FakePrinterFactory
+PrinterFactory ..> RealPrinter
+FakePrinterFactory ..> FakePrinter
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+class Printer {
+  -boolean available
+
+  +isAvailable(): boolean
+  +setAvailable(boolean available): void
+  +print(String name): void
+}
+
+class PrinterManager {
+  -{static} PrinterManager instance
+  -List<Printer> printers
+
+  -PrinterManager()
+  +{static} getInstance(): PrinterManager
+  +getPrinter(): Printer
+}
+
+class UserThread {
+  -Printer printer
+
+  +UserThread(String name)
+  +run(): void
+}
+
+Thread <|-- UserThread
+UserThread *-- Printer
+UserThread --> PrinterManager
+@enduml

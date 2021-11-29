@@ -1,0 +1,30 @@
+@startuml
+class TicketMachine {
+  -{static} TicketMachine instance
+  -{static} long LIMIT
+  -long currentTicketNumber
+
+  -TicketMachine()
+  +{static} getInstance(): TicketMachine
+  +issueTicket(): Ticket
+}
+
+class Ticket {
+  -long serialNumber
+
+  +Ticket(long serialNumber)
+  +getSerialNumber(): long
+  +isValidSerialNumber(): boolean
+}
+
+class BuyerThread {
+  -Ticket ticket
+
+  +BuyerThread(String name)
+  +run(): void
+}
+
+Thread <-- BuyerThread
+BuyerThread *-- Ticket
+BuyerThread --> TicketMachine
+@enduml

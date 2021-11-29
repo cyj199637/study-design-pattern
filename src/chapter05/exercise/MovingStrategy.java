@@ -1,4 +1,4 @@
-package chapter05.example;
+package chapter05.exercise;
 
 public interface MovingStrategy {
     void move();

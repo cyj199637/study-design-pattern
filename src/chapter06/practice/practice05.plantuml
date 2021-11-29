@@ -1,0 +1,38 @@
+@startuml
+interface Server {
+  doSomething(): void
+}
+
+class ServerProxy {
+  +doSomething(): void
+}
+
+class FakeServer {
+  +doSomething(): void
+}
+
+class ServerFactory {
+  -{static} ServerFactory instance
+
+  #ServerFactory()
+  +{static} getInstance(): ServerFactory
+  +{static} setInstance(ServerFactory serverFactory)
+  +getServer(): Server
+}
+
+class FakeServerFactory {
+  +getServer(): Server
+}
+
+class UseServer {
+  +doSomething(): void
+}
+
+Server <|.. ServerProxy
+Server <|.. FakeServer
+ServerFactory <|-- FakeServerFactory
+UseServer ..> ServerFactory
+UseServer ..> Server
+ServerFactory ..> ServerProxy
+FakeServerFactory ..> FakeServer
+@enduml
