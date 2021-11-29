@@ -1,0 +1,14 @@
+@startuml
+participant Client
+participant Singleton
+participant SingletonInstance
+
+Client -> Singleton: getInstance()
+
+opt instance == null
+  Singleton -> SingletonInstance: <<create>>
+  SingletonInstance++
+end
+
+Client <-- Singleton: instance
+@enduml
