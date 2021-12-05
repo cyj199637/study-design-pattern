@@ -1,0 +1,39 @@
+@startuml
+class Context {
+    -state: State
+
+    +request1()
+    +request2()
+    +request3()
+    +setState(State state)
+}
+
+interface State {
+    +method1()
+    +method2()
+    +method3()
+}
+
+class State1 {
+    +method1()
+    +method2()
+    +method3()
+}
+
+class State2 {
+    +method1()
+    +method2()
+    +method3()
+}
+
+class State3 {
+    +method1()
+    +method2()
+    +method3()
+}
+
+Context o-- State
+State <|.. State1
+State <|.. State2
+State <|.. State3
+@enduml

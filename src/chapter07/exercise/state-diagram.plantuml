@@ -1,0 +1,15 @@
+@startuml
+[*] --> OFF
+note left of OFF : 상태
+OFF --> Active : switch_on[power_exists]/turnon()
+note on link: 상태 진입 \n이벤트(인자 리스트)[조건]/액션
+Active --> OFF : switch_off/turnoff()
+note on link : 상태 전이
+
+state Active {
+    [*] --> ON
+    ON --> WORKING : run/operate()
+    WORKING --> ON : stop/suspend()
+}
+note right of Active :  복합 상태
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+class Light {
+    -state: State
+
+    +onButtonPushed(): void
+    +offButtonPushed(): void
+    +setState(State state): void
+}
+
+interface State {
+    +onButtonPushed(Light light): void
+    +offButtonPushed((Light light): void
+}
+
+class On {
+    +onButtonPushed(Light light): void
+    +offButtonPushed((Light light): void
+}
+
+class Off {
+    +onButtonPushed(Light light): void
+    +offButtonPushed((Light light): void
+}
+
+class Sleeping {
+    +onButtonPushed(Light light): void
+    +offButtonPushed((Light light): void
+}
+
+Light o--> State
+State <|.. On
+State <|.. Off
+State <|.. Sleeping
+@enduml
