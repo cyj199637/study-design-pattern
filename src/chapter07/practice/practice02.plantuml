@@ -1,0 +1,44 @@
+@startuml
+class Fan {
+    -state: State
+
+    +switchOn(): void
+    +switchOff(): void
+    +run(): void
+    +stop(): void
+    +setState(State state): void
+}
+
+interface State {
+    +switchOn(Fan fan): void
+    +switchOff(Fan fan): void
+    +run(Fan fan): void
+    +stop(Fan fan): void
+}
+
+class Off {
+    +switchOn(Fan fan): void
+    +switchOff(Fan fan): void
+    +run(Fan fan): void
+    +stop(Fan fan): void
+}
+
+class On {
+    +switchOn(Fan fan): void
+    +switchOff(Fan fan): void
+    +run(Fan fan): void
+    +stop(Fan fan): void
+}
+
+class Working {
+    +switchOn(Fan fan): void
+    +switchOff(Fan fan): void
+    +run(Fan fan): void
+    +stop(Fan fan): void
+}
+
+Fan o--> State
+State <|.. On
+State <|.. Off
+State <|.. Working
+@enduml

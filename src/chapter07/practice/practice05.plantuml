@@ -1,0 +1,24 @@
+@startuml
+class VendingMachine {
+    -state State
+    -balance BigDecimal
+    -drinks Map<Integer, Drink>
+
+    +insertMoney(BigDecimal money): void
+    +returnMoney(BigDecimal money): void
+    +getDrink(): Drink
+}
+
+class Drink {
+    -price BigDecimal
+    +inventory Integer
+
+    -setPrice(BigDecimal price): void
+    -setInventory(Integer inventory): void
+}
+
+interface State {
+    +insertMoney(VendingMachine machine): void
+    +returnMoney(VendingMachine machine): void
+}
+@enduml
