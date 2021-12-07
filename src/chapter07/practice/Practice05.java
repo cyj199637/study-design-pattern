@@ -51,7 +51,7 @@ class VendingMachine {
     public void changeDrinkPriceAndInventory(int number, BigDecimal price, int inventory) {
         Drink drink = drinks.get(number);
         drink.setPrice(price);
-        drink.setInventory(inventory);
+        drink.increaseInventory(inventory);
     }
 }
 
