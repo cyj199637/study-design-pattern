@@ -1,6 +1,7 @@
 package chapter07.practice;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Practice05 {
@@ -10,29 +11,47 @@ public class Practice05 {
 }
 
 class VendingMachine {
-    private State state;
-    private BigDecimal balance;
-    private Map<Integer, Drink> drinks;
+    private InputCashState state = NoCash.getInstance();
+    private BigDecimal currentInputCash = BigDecimal.ZERO;
+    private Map<Integer, Drink> drinks = new HashMap<>();
 
-    public void insertMoney(BigDecimal money) {
-        this.balance = balance.add(money);
-        System.out.println(money);
+    public BigDecimal getCurrentInputCash() {
+        return currentInputCash;
     }
 
-    public Drink pushButton(Integer number, BigDecimal money) throws Exception {
-        Drink drink = drinks.get(number);
+    public Map<Integer, Drink> getDrinks() {
+        return drinks;
+    }
+
+    public void setCurrentInputCash(BigDecimal currentInputCash) {
+        this.currentInputCash = currentInputCash;
+    }
+
+    public void setState(InputCashState state) {
+        this.state = state;
+    }
+
+    public void insertCash(BigDecimal cash) {
+        state.insertCash(this, cash);
+    }
+
+    public Drink pushButton(int number) throws RuntimeException {
         try {
-            drink.decreaseInventory();
-        } catch (Exception e) {
-            System.out.println("재고가 부족합니다.");
+            return state.pushButton(this, number);
+        } catch (RuntimeException e) {
+            returnCash();
             throw e;
         }
-
-
     }
 
-    public BigDecimal returnMoney() {
-        return
+    public BigDecimal returnCash() {
+        return state.returnCash(this);
+    }
+
+    public void changeDrinkPriceAndInventory(int number, BigDecimal price, int inventory) {
+        Drink drink = drinks.get(number);
+        drink.setPrice(price);
+        drink.setInventory(inventory);
     }
 }
 
@@ -40,6 +59,11 @@ class Drink {
     private BigDecimal price;
     private int inventory = 0;
     private DrinkInventoryState state = NotEnough.getInstance();
+
+    public Drink(BigDecimal price, int inventory) {
+        this.price = price;
+        this.inventory = inventory;
+    }
 
     public void setState(DrinkInventoryState state) {
         this.state = state;
@@ -49,17 +73,23 @@ class Drink {
         this.price = price;
     }
 
-    public void increaseInventory(int inventory) {
-        state.reflect(this);
-        this.inventory += inventory;
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 
-    public void decreaseInventory() throws Exception {
-        if (inventory <= 0) {
-            state.reflect(this);
-            throw new Exception();
-        }
+    public int getInventory() {
+        return inventory;
+    }
 
-        --this.inventory;
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void increaseInventory(int inventory) {
+        state.increaseInventory(this, inventory);
+    }
+
+    public void decreaseInventory() throws RuntimeException {
+        state.decreaseInventory(this);
     }
 }

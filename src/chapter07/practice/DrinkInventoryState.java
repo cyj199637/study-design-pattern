@@ -1,5 +1,7 @@
 package chapter07.practice;
 
 public interface DrinkInventoryState {
-    void reflect(Drink drink);
+    void increaseInventory(Drink drink, int inventory);
+
+    void decreaseInventory(Drink drink);
 }

@@ -10,7 +10,19 @@ public class Enough implements DrinkInventoryState {
     }
 
     @Override
-    public void reflect(Drink drink) {
-        drink.setState(NotEnough.getInstance());
+    public void increaseInventory(Drink drink, int inventory) {
+        int currentInventory = drink.getInventory();
+        drink.setInventory(currentInventory + inventory);
+    }
+
+    @Override
+    public void decreaseInventory(Drink drink) throws RuntimeException {
+        int decreasedInventory = drink.getInventory() - 1;
+        if (decreasedInventory < 0) {
+            drink.setState(NotEnough.getInstance());
+            System.out.println("재고가 부족합니다.");
+            throw new RuntimeException();
+        }
+        drink.setInventory(decreasedInventory);
     }
 }
