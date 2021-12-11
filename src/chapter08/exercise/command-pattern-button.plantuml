@@ -1,0 +1,39 @@
+@startuml
+class Lamp {
+  +turnOn(): void
+}
+
+class Alarm {
+  +turnOn(): void
+}
+
+class Button {
+  -command: Command
+
+  +Button(Command command)
+  +setCommand(Command command): void
+  +pressed(): void
+}
+
+interface Command {
+  +execute(): void
+}
+
+class LampOnCommand {
+  -lamp: Lamp
+
+  +execute(): void
+}
+
+class AlarmOnCommand {
+  -alarm: Alarm
+
+  +execute(): void
+}
+
+Button --> Command
+Command <|.. LampOnCommand
+Command <|.. AlarmOnCommand
+LampOnCommand --> Lamp
+AlarmOnCommand --> Alarm
+@enduml

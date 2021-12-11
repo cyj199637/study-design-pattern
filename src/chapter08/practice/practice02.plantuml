@@ -1,0 +1,39 @@
+@startuml
+class TV {
+  -powerOn: boolean
+  -muteOn: boolean
+
+  +power(): void
+  +mute(): void
+}
+
+class RemoteController {
+  -command1: Command
+  -command2: Command
+
+  +button1Pressed(): void
+  +button2Pressed(): void
+}
+
+interface Command {
+  +execute(): void
+}
+
+class PowerCommand {
+  -tv: TV
+
+  +execute(): void
+}
+
+class MuteCommand {
+  -tv: TV
+
+  +execute(): void
+}
+
+RemoteController --> Command
+Command <|.. PowerCommand
+Command <|.. MuteCommand
+PowerCommand --> TV
+MuteCommand --> TV
+@enduml

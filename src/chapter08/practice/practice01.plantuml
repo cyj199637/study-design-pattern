@@ -1,0 +1,18 @@
+@startuml
+class TV {
+  -powerOn: boolean
+  -muteOn: boolean
+
+  +power(): void
+  +mute(): void
+}
+
+class RemoteController {
+  -tv: TV
+
+  +button1Pressed(): void
+  +button2Pressed(): void
+}
+
+TV <-- RemoteController
+@enduml

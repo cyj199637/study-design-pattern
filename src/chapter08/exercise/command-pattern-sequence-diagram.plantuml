@@ -1,0 +1,20 @@
+@startuml
+participant Receiver
+participant Client
+participant ConcreteCommand
+participant Invoker
+
+Client --> ConcreteCommand: <<create>>: 클라이언트가 원하는 Command 객체 생성
+ConcreteCommand++
+ConcreteCommand--
+
+Client --> Invoker: setCommand(ConcreteCommand): Invoker 객체에 바인딩
+Invoker++
+Invoker--
+
+Invoker --> ConcreteCommand: execute()
+ConcreteCommand++
+ConcreteCommand --> Receiver: action()
+Receiver++
+ConcreteCommand--
+@enduml
