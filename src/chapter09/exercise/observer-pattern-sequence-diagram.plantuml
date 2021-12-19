@@ -1,0 +1,25 @@
+@startuml
+participant ConcreteSubject
+participant ConcreteObserver1
+participant ConcreteObserver2
+
+ConcreteObserver1 --> ConcreteSubject: setState(subjectState: SubjectState): void
+ConcreteSubject++
+
+ConcreteSubject --> ConcreteSubject: notifyObservers(): void
+ConcreteSubject++
+
+ConcreteSubject --> ConcreteObserver1: update(): void
+ConcreteSubject--
+ConcreteObserver1++
+
+ConcreteObserver1 --> ConcreteSubject: getState(): SubjectState
+ConcreteObserver1--
+
+ConcreteSubject --> ConcreteObserver2: update(): void
+ConcreteObserver2++
+
+ConcreteObserver2 --> ConcreteSubject: getState(): SubjectState
+ConcreteObserver2--
+ConcreteSubject++
+@enduml

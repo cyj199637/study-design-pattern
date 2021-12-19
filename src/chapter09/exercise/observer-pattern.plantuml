@@ -1,0 +1,31 @@
+@startuml
+class Subject {
+  -observers: List<Observer>
+
+  +attach(observer: Observer): void
+  +detach(observer: Observer): void
+  +notifyObservers(): void
+}
+
+class ConcreteSubject {
+  -subjectState: SubjectState
+
+  +setState(subjectState: SubjectState): void
+  +getState(): SubjectState
+}
+
+interface Observer {
+  +update(): void
+}
+
+class ConcreteObserver {
+  -subjectState: SubjectState
+
+  +update(): void
+}
+
+Subject --> Observer
+ConcreteSubject --|> Subject
+Observer <|.. ConcreteObserver
+ConcreteObserver --> ConcreteSubject
+@enduml
