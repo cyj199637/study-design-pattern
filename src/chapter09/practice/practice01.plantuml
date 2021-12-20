@@ -1,0 +1,70 @@
+@startuml
+class Battery {
+  -level: int
+  -display: BatteryLevelDisplay
+  -warning: LowBatteryWarning
+
+  +setDisplay(display: BatteryLevelDisplay): void
+  +setWarning(warning: LowBatteryWarning): void
+  +getLevel(): int
+  +consume(amount: int): void
+}
+
+class BatteryLevelDisplay {
+  -battery: Battery
+
+  +BatteryLevelDisplay(battery: Battery)
+  +update(): void
+}
+
+class LowBatteryWarning {
+  -battery: Battery
+
+  +LowBatteryWarning(battery: Battery)
+  +update(): void
+}
+
+Battery <--> BatteryLevelDisplay
+Battery <--> LowBatteryWarning
+@enduml
+
+@startuml
+abstract Subject {
+  -observers: List<Observer>
+
+  +attach(observer: Observer): void
+  +detach(observer: Observer): void
+  +notifyObservers(): void
+}
+
+class Battery {
+  -level: int
+
+  +getLevel(): int
+  +consume(amount: int): void
+}
+
+interface Observer {
+  +update(): void
+}
+
+class BatteryLevelDisplay {
+  -battery: Battery
+
+  +BatteryLevelDisplay(battery: Battery)
+  +update(): void
+}
+
+class LowBatteryWarning {
+  -battery: Battery
+
+  +LowBatteryWarning(battery: Battery)
+  +update(): void
+}
+Subject <|-- Battery
+Observer <|.. BatteryLevelDisplay
+Observer <|.. LowBatteryWarning
+Subject --> Observer
+Battery <-- BatteryLevelDisplay
+Battery <-- LowBatteryWarning
+@enduml
