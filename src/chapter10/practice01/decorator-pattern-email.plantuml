@@ -1,0 +1,37 @@
+@startuml
+interface EmailContentService {
+  +getContent(): String
+}
+
+class BasicEmailContent {
+  -content: String
+
+  +BasicEmailContent(content: String)
+  +getContent(): String
+}
+
+class EmailContentDecorator {
+  -service: EmailContentService
+
+  +EmailContentDecorator(service: EmailContentService)
+  +getContent(): String
+}
+
+class ExternalEmailContentDecorator {
+  +ExternalEmailContentDecorator(service: EmailContentService)
+  +getContent(): String
+  -addDisclaimer(content: String): String
+}
+
+class SecureEmailContentDecorator {
+  +SecureEmailContentDecorator(service: EmailContentService)
+  +getContent(): String
+  -encrypt(content: String): String
+}
+
+EmailContentService <|.. BasicEmailContent
+EmailContentService <|.. EmailContentDecorator
+EmailContentService --* EmailContentDecorator
+EmailContentDecorator <|-- ExternalEmailContentDecorator
+EmailContentDecorator <|-- SecureEmailContentDecorator
+@enduml
