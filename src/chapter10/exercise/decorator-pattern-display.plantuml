@@ -1,0 +1,34 @@
+@startuml
+abstract class Display {
+  +draw(): void
+}
+
+class RoadDisplay {
+  +draw(): void
+}
+
+class DisplayDecorator {
+  -decoratedDisplay: Display
+
+  +DisplayDecorator(decoratedDisplay: Display)
+  +draw(): void
+}
+
+class LaneDecorator {
+  +LaneDecorator(decoratedDisplay: Display)
+  +draw(): void
+  -drawLane(): void
+}
+
+class TrafficDecorator {
+  +TrafficDecorator(decoratedDisplay: Display)
+  +draw(): void
+  -drawTraffic(): void
+}
+
+Display <|-- RoadDisplay
+Display <|-- DisplayDecorator
+Display --* DisplayDecorator
+DisplayDecorator <|-- LaneDecorator
+DisplayDecorator <|-- TrafficDecorator
+@enduml

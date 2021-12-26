@@ -1,0 +1,34 @@
+@startuml
+abstract class Component {
+  +operation()
+}
+
+class ConcreteComponent {
+  +operation()
+}
+
+class Decorator {
+  -component: Component
+
+  +operation()
+}
+
+class ConcreteDecoratorA {
+  +operation()
+  -addedBehavior()
+}
+
+class ConcreteDecoratorB {
+  +operation()
+  -addedBehavior()
+}
+
+Component <|-- ConcreteComponent
+Component <|-- Decorator
+Component --* Decorator
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
+
+note left of Decorator : component.operation();
+note left of ConcreteDecoratorA: super.operation(); \naddedBehavior();
+@enduml

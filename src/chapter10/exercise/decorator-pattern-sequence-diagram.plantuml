@@ -1,0 +1,28 @@
+@startuml
+participant Client
+participant ConcreteDecoratorB
+participant ConcreteDecoratorA
+participant ConcreteComponent
+
+Client --> ConcreteDecoratorB: operation(): void
+ConcreteDecoratorB++
+
+ConcreteDecoratorB --> ConcreteDecoratorA: operation(): void
+ConcreteDecoratorA++
+
+ConcreteDecoratorA --> ConcreteComponent: operation(): void
+ConcreteComponent++
+ConcreteComponent--
+
+ConcreteDecoratorA --> ConcreteDecoratorA: addedBehavior(): void
+ConcreteDecoratorA++
+ConcreteDecoratorA--
+
+ConcreteDecoratorA--
+
+ConcreteDecoratorB --> ConcreteDecoratorB: addedBehavior(): void
+ConcreteDecoratorB++
+ConcreteDecoratorB--
+
+ConcreteDecoratorB--
+@enduml

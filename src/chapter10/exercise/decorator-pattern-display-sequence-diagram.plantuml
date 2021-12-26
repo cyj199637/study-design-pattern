@@ -1,0 +1,23 @@
+@startuml
+participant Client
+participant LaneDecorator
+participant DisplayDecorator
+participant RoadDisplay
+
+Client --> LaneDecorator: draw(): void
+LaneDecorator++
+
+LaneDecorator --> DisplayDecorator: draw(): void
+DisplayDecorator++
+DisplayDecorator--
+
+DisplayDecorator --> RoadDisplay: draw(): void
+RoadDisplay++
+RoadDisplay--
+
+LaneDecorator --> LaneDecorator: drawLane(): void
+LaneDecorator++
+LaneDecorator--
+
+LaneDecorator--
+@enduml
