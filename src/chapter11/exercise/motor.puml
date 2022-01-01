@@ -1,0 +1,72 @@
+@startuml
+class HyundaiMotor {
+  -motorStatus: MotorStatus
+
+  +HyundaiMotor(door: Door)
+  +move(direction: Direction): void
+  -moveHyundaiMotor(direction: Direction): void
+  +getMotorStatus(): MotorStatus
+  -setMotorStatus(motorStatus: MotorStatus): void
+}
+
+class Door {
+  -doorStatus: DoorStatus
+
+  +Door()
+  +getDoorStatus(): DoorStatus
+  +open(): void
+  +close(): void
+}
+
+HyundaiMotor --> "-door" Door
+
+enum MotorStatus {
+  +MOVING
+  +STOPPED
+}
+
+enum DoorStatus {
+  +OPENED
+  +CLOSED
+}
+
+enum Direction {
+  +UP
+  +DOWN
+}
+@enduml
+
+@startuml
+abstract Motor {
+    -motorStatus: MotorStatus
+
+    +Motor(door: Door)
+    +move(direction: Direction): void
+    #{abstract} moveMotor(direction: Direction): void
+    +getMotorStatus(): MotorStatus
+    #setMotorStatus(motorStatus: MotorStatus): void
+}
+
+class HyundaiMotor {
+  +HyundaiMotor(door: Door)
+  #moveMotor(direction: Direction): void
+}
+
+class LGMotor {
+  +LGMotor(door: Door)
+  #moveMotor(direction: Direction): void
+}
+
+class Door {
+  -doorStatus: DoorStatus
+
+  +Door()
+  +getDoorStatus(): DoorStatus
+  +open(): void
+  +close(): void
+}
+
+Door "\#door" <-- Motor
+Motor <|-- HyundaiMotor
+Motor <|-- LGMotor
+@enduml

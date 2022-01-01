@@ -1,0 +1,15 @@
+@startuml
+participant Client
+participant ConcreteClass
+
+Client --> ConcreteClass: templateMethod(): void
+ConcreteClass++
+
+ConcreteClass --> ConcreteClass: primitiveOperation1(): void
+ConcreteClass++
+ConcreteClass--
+
+ConcreteClass --> ConcreteClass: primitiveOperation2(): void
+ConcreteClass++
+ConcreteClass--
+@enduml

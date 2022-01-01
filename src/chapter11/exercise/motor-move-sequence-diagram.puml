@@ -1,0 +1,33 @@
+@startuml
+participant Client
+participant HyundaiMotor
+participant Door
+
+Client --> HyundaiMotor: move(direction: Direction): void
+HyundaiMotor++
+
+HyundaiMotor --> HyundaiMotor: motorStatus := getMotorStatus()
+HyundaiMotor++
+HyundaiMotor--
+
+HyundaiMotor--
+
+break motorStatus == MOVING
+end
+
+HyundaiMotor --> Door: doorStatus := getDoorStatus()
+Door++
+Door--
+
+opt doorStatus == OPENED
+  HyundaiMotor --> Door: close(): void
+end
+
+HyundaiMotor --> HyundaiMotor: moveHyundaiMotor(direction: Direction): void
+HyundaiMotor++
+HyundaiMotor--
+
+HyundaiMotor --> HyundaiMotor: setMotorStatus(MOVING): void
+HyundaiMotor++
+HyundaiMotor--
+@enduml
