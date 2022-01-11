@@ -1,0 +1,69 @@
+@startuml
+abstract class Motor {
+  -motorStatus: MotorStatus
+
+  +Motor()
+  +move(direction: Direction): void
+  #{abstract} moveMotor(direction: Direction): void
+  +stop(): void
+}
+
+class LGMotor {
+  #moveMotor(direction: Direction): void
+}
+
+class HyundaiMotor {
+  #moveMotor(direction: Direction): void
+}
+
+class ElevatorController {
+  -id: int
+  -currentFloor: int
+  -motor: Motor
+
+  +ElevatorController(id: int, motor Motor)
+  +gotoFloor(destination: int): void
+}
+
+ElevatorController o-- Motor
+Motor <|-- LGMotor
+Motor <|-- HyundaiMotor
+@enduml
+
+@startuml
+abstract class Motor {
+  -motorStatus: MotorStatus
+
+  +Motor()
+  +move(direction: Direction): void
+  #{abstract} moveMotor(direction: Direction): void
+  +stop(): void
+}
+
+class LGMotor {
+  #moveMotor(direction: Direction): void
+}
+
+class HyundaiMotor {
+  #moveMotor(direction: Direction): void
+}
+
+class ElevatorController {
+  -id: int
+  -currentFloor: int
+  -motor: Motor
+
+  +ElevatorController(id: int, brand MotorBrand)
+  +setMotor(brand: MotorBrand): void
+  +gotoFloor(destination: int): void
+}
+
+class MotorFactory {
+  +{static} getMotor(brand: MotorBrand): Motor
+}
+
+ElevatorController --> MotorFactory
+MotorFactory --> Motor
+Motor <|-- LGMotor
+Motor <|-- HyundaiMotor
+@enduml
