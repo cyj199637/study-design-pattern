@@ -1,0 +1,40 @@
+@startuml
+class ElevatorController {
+  -id: int
+  -currentFloor: int
+
+  +ElevatorController(int id)
+  +gotoFloor(destination: int): void
+}
+
+class ElevatorManager {
+  -controllers: List<ElevatorController>
+  -strategy: SchedulerStrategy
+
+  +ElevatorManager(controllerCount: int)
+  +setStrategy(strategy: SchedulerStrategy): void
+  +requestElevator(destination: int, direction: Direction): void
+}
+
+class SchedulerFactory {
+  +getScheduler(strategy: SchedulingStrategy): ElevatorScheduler
+}
+
+interface ElevatorScheduler {
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+class ThroughputScheduler {
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+class ResponseTimeScheduler {
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+ElevatorController --* ElevatorManager
+ElevatorManager --> SchedulerFactory
+SchedulerFactory --> ElevatorScheduler
+ElevatorScheduler <|-- ThroughputScheduler
+ElevatorScheduler <|-- ResponseTimeScheduler
+@enduml

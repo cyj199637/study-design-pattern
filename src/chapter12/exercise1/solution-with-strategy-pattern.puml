@@ -1,0 +1,40 @@
+@startuml
+class ElevatorController {
+  -id: int
+  -currentFloor: int
+
+  +ElevatorController(int id)
+  +gotoFloor(destination: int): void
+}
+
+class ElevatorManager {
+  -controllers: List<ElevatorController>
+
+  +ElevatorManager(controllerCount: int)
+  +requestElevator(destination: int, direction: Direction): void
+}
+
+interface ElevatorScheduler {
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+class ThroughputScheduler {
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+class ResponseTimeScheduler {
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+ElevatorController --* ElevatorManager
+ElevatorManager *-- ElevatorScheduler
+ElevatorScheduler <|-- ThroughputScheduler
+ElevatorScheduler <|-- ResponseTimeScheduler
+
+note as n1
+  ElevatorManager 는 ThroughputScheduler 객체와
+  ResponseTimeScheduler 객체를 생성한 후,
+  이를 ElevatorScheduler 인터페이스를 통해 사용
+  <b><color:royalBlue>-> 전략 패턴 활용</color>
+end note
+@enduml

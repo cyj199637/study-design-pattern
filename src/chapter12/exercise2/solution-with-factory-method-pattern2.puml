@@ -1,0 +1,64 @@
+@startuml
+class ElevatorController {
+  -id: int
+  -currentFloor: int
+
+  +ElevatorController(int id)
+  +gotoFloor(destination: int): void
+}
+
+abstract class ElevatorManager {
+  -controllers: List<ElevatorController>
+
+  +ElevatorManager(controllerCount: int)
+  +requestElevator(destination: int, direction: Direction): void
+  #{abstract} getScheduler(): ElevatorScheduler
+}
+
+class ElevatorManagerWithThroughputScheduling {
+  +ElevatorManagerWithThroughputScheduling(controllerCount: int)
+  #getScheduler(): ElevatorScheduler
+}
+
+class ElevatorManagerWithResponseTimeScheduling {
+  +ElevatorManagerWithResponseTimeScheduling(controllerCount: int)
+  #getScheduler(): ElevatorScheduler
+}
+
+class ElevatorManagerWithDynamicScheduling {
+  +ElevatorManagerWithDynamicScheduling(controllerCount: int)
+  #getScheduler(): ElevatorScheduler
+}
+
+interface ElevatorScheduler {
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+class ThroughputScheduler {
+  -scheduler: ThroughputScheduler
+
+  -ThroughputScheduler()
+  +{static} getInstance(): ThroughputScheduler
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+class ResponseTimeScheduler {
+  -scheduler: ResponseTimeScheduler
+
+  -ResponseTimeScheduler()
+  +{static} getInstance(): ResponseTimeScheduler
+  +selectElevator(manager: ElevatorManager, destination: int, direction: Direction): int
+}
+
+ElevatorController --* ElevatorManager
+ElevatorManager <|-- ElevatorManagerWithThroughputScheduling
+ElevatorManager <|-- ElevatorManagerWithResponseTimeScheduling
+ElevatorManager <|-- ElevatorManagerWithDynamicScheduling
+ElevatorScheduler <|-- ThroughputScheduler
+ElevatorScheduler <|-- ResponseTimeScheduler
+ElevatorManager ..> ElevatorScheduler
+ElevatorManagerWithThroughputScheduling ..> ThroughputScheduler
+ElevatorManagerWithResponseTimeScheduling ..> ResponseTimeScheduler
+ElevatorManagerWithDynamicScheduling ..> ThroughputScheduler
+ElevatorManagerWithDynamicScheduling ..> ResponseTimeScheduler
+@enduml
