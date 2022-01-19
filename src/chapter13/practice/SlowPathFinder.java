@@ -1,4 +1,4 @@
-package chapter13.practice1;
+package chapter13.practice;
 
 public class SlowPathFinder extends PathFinder {
     @Override

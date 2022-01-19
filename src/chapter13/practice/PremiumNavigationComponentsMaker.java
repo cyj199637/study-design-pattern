@@ -1,4 +1,4 @@
-package chapter13.practice1;
+package chapter13.practice;
 
 public class PremiumNavigationComponentsMaker extends NavigationComponentsMaker {
     public static PremiumNavigationComponentsMaker instance = new PremiumNavigationComponentsMaker();

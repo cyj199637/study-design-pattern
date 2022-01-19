@@ -1,4 +1,4 @@
-package chapter13.practice1;
+package chapter13.practice;
 
 public enum Option {
     BASIC,

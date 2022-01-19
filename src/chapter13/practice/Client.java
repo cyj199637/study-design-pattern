@@ -1,4 +1,4 @@
-package chapter13.practice1;
+package chapter13.practice;
 
 public class Client {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package chapter13.practice1;
+package chapter13.practice;
 
 public class NavigationComponentsMakerFactory {
     public static NavigationComponentsMaker getMaker(Option option) {

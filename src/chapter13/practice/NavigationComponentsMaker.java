@@ -1,4 +1,4 @@
-package chapter13.practice1;
+package chapter13.practice;
 
 public abstract class NavigationComponentsMaker {
     public abstract GPS createGPS();
