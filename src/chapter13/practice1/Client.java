@@ -2,7 +2,7 @@ package chapter13.practice1;
 
 public class Client {
     public static void main(String[] args) {
-        NavigationComponentsMaker maker = NavigationComponentsMakerFactory.getMaker(Option.PREMIUM);
+        NavigationComponentsMaker maker = TestComponentsMakerFactory.getMaker(SlowPathFinder.class);
 
         GPS gps = maker.createGPS();
         Screen screen = maker.createScreen();
