@@ -1,0 +1,54 @@
+@startuml
+class Computer {
+  -components: List<ComputerComponent>
+
+  +addComponent(component: ComputerComponent): void
+  +removeComponent(component: ComputerComponent): void
+  +getPrice(): int
+  +getPower(): int
+}
+
+interface ComputerComponent {
+  +getPrice(): int
+  +getPower(): int
+}
+
+class Keyboard {
+  -price: int
+  -power: int
+
+  +getPrice(): int
+  +getPower(): int
+}
+
+class Body {
+  -price: int
+  -power: int
+
+  +getPrice(): int
+  +getPower(): int
+}
+
+class Monitor {
+  -price: int
+  -power: int
+
+  +getPrice(): int
+  +getPower(): int
+}
+
+class Speaker {
+  -price: int
+  -power: int
+
+  +getPrice(): int
+  +getPower(): int
+}
+
+Computer *--> ComputerComponent
+ComputerComponent <|-- Computer
+ComputerComponent <|-- Keyboard
+ComputerComponent <|-- Body
+ComputerComponent <|-- Monitor
+ComputerComponent <|-- Speaker
+@enduml

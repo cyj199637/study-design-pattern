@@ -1,0 +1,16 @@
+@startuml
+participant Client
+participant Composite
+participant Leaf
+
+Client -> Composite: 1. operation()
+Composite++
+
+loop for each leaf
+  Composite -> Leaf: operation()
+  Leaf++
+  Leaf--
+end loop
+
+Composite--
+@enduml

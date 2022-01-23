@@ -1,0 +1,21 @@
+@startuml
+interface Component {
+  +operation()
+}
+
+class Leaf {
+  +operation()
+}
+
+class Composite {
+  -components: List<Component>
+
+  +addComponent(component: Component): void
+  +removeComponent(component: Component): void
+  +operation()
+}
+
+Component <|-- Leaf
+Component <|-- Composite
+Component "0..*" <--* Composite
+@enduml
