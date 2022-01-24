@@ -1,0 +1,31 @@
+@startuml
+abstract class Element {
+  #name: String
+  #depth: int
+
+  +setDepth(depth: int): void
+  +getName(): String
+  +getSize(): int
+  +print(): void
+}
+
+class File {
+  -size: int
+
+  +getSize(): int
+  +print(): void
+}
+
+class Directory {
+  -entries: List<Element>
+
+  +getSize(): int
+  +addEntry(entry: Element): void
+  +removeEntry(entry: Element): void
+  +print(): void
+}
+
+Element <|-- File
+Element <|-- Directory
+Element "0..*" <--* Directory
+@enduml
